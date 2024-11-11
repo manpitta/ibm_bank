@@ -1,0 +1,60 @@
+<section class="geral" *ngIf="conta$ | async as conta">
+    <!-- <button mat-raised-button color="primary" class="add" routerLink="/Movimentacoes/novo">
+        <span>Adicionar</span>
+    </button>
+    <button mat-fab color="primary" class="add mobile" routerLink="/Movimentacoes/novo">
+        <mat-icon>add</mat-icon>
+    </button> -->
+    <div class="header">
+        <ait-form
+            [TableFormFields]="fieldsConta"
+            [formgroup]="formContas"
+        ></ait-form>
+
+        <span>{{conta.nomeCliente}}</span>
+
+        <div *ngIf="formContas.value as formConta">
+            <ng-container *ngIf="formConta.tipoConta == 'corrente'">
+                <div><span><strong>Saldo: </strong>{{conta.saldo}}</span></div>
+            </ng-container>
+            <ng-container *ngIf="formConta.tipoConta == 'credito'">
+                <div *ngIf="contaCredito$ | async as contaCred; else NaoPossuiCredito"><span><strong>Limite Disponivel: </strong>{{contaCred.limiteCredito - contaCred.saldoUtilizado}}</span></div>
+                <ng-template #NaoPossuiCredito><span><strong>Crédito não cadastrado</strong></span></ng-template>
+            </ng-container>
+            
+        </div>
+    </div>
+    <section class="pageContent" *ngIf="movimentacoes$ | async as movimentacoes">
+
+        <table mat-table [dataSource]="movimentacoes" class="mat-elevation-z8">
+          
+            <ng-container matColumnDef="dataMovimentacao">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let element"> {{element!.dataMovimentacao[2]+'/'+element!.dataMovimentacao[1]+'/'+element!.dataMovimentacao[0]}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="descricao">
+              <th mat-header-cell *matHeaderCellDef> Descrição </th>
+              <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element"> {{element.statusPagamento}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef> Tipo </th>
+              <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="valor">
+              <th mat-header-cell *matHeaderCellDef> Valor </th>
+              <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="todasColunas"></tr>
+            <tr mat-row *matRowDef="let row; columns: todasColunas;"></tr>
+          </table>
+    </section>
+</section>
