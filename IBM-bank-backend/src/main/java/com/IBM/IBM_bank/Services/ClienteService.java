@@ -25,18 +25,15 @@ public class ClienteService {
 
     @Transactional
     public Cliente criarClienteComConta(Cliente cliente, Integer numeroConta) {
-        // Salvar o cliente no banco de dados
         Cliente clienteSalvo = clienteRepository.save(cliente);
 
-        // Criar uma nova conta com saldo zero e associar ao cliente
         Conta novaConta = new Conta();
         novaConta.setNumero(numeroConta);
         novaConta.setTipoConta(TipoConta.CORRENTE);
-        novaConta.setSaldo(0.0); // Saldo inicial zero
+        novaConta.setSaldo(0.0);
         novaConta.setStatus(StatusConta.ATIVA);
-        novaConta.setCliente(clienteSalvo); // Associar a conta ao cliente salvo
+        novaConta.setCliente(clienteSalvo);
 
-        // Salvar a conta no banco de dados
         Conta conta = contaRepository.save(novaConta);
 
         clienteSalvo.setConta(conta);

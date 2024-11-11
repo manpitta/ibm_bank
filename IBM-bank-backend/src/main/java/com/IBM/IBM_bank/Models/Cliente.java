@@ -29,8 +29,6 @@ public class Cliente {
         return conta != null ? conta.getId() : null;
     }
 
-    // Getters e Setters
-
     public Integer getId() {
         return id;
     }

@@ -49,8 +49,6 @@ public class Conta {
         return cliente != null ? cliente.getNome() : null;
     }
 
-    // Getters e Setters
-
     public Integer getId() {
         return id;
     }

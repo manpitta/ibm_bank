@@ -31,7 +31,6 @@ public class MovimentacaoController {
         return ResponseEntity.ok(movimentacaoService.listarTodasMovimentacoes());
     }
 
-    // Lista movimentações por conta_id e, opcionalmente, por tipo de movimentação, intervalo de datas e status de pagamento
     @GetMapping("/conta/{contaId}")
     public ResponseEntity<List<Movimentacao>> listarMovimentacoesPorConta(
             @PathVariable Integer contaId,

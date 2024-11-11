@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Integer> {
 
-    // Buscar movimentações por conta (assumindo que a Conta tem um relacionamento @ManyToOne)
     List<Movimentacao> findByContaId(Integer contaId);
 
     List<Movimentacao> findByContaIdAndTipo(Integer contaId, TipoMovimentacao tipo);
@@ -30,6 +29,5 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Inte
 
     List<Movimentacao> findByContaIdAndTipoAndStatusPagamento(Integer contaId, TipoMovimentacao tipo, StatusPagamento statusPagamento);
 
-    // Buscar uma movimentação por ID (exemplo básico)
     Optional<Movimentacao> findById(Integer id);
 }

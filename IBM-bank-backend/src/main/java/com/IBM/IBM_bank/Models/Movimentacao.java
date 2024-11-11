@@ -38,8 +38,6 @@ public class Movimentacao {
 
     private LocalDate dataCompetencia; // Mês e ano da competência (e.g., "MM-yyyy")
 
-    // Getters e Setters
-
     public Integer getId() {
         return id;
     }
